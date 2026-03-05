@@ -5,7 +5,6 @@ const NewsCard = ({ news }) => {
     title,
     details,
       thumbnail_url,
-    image_url,
     total_view,
     rating,
     author,
