@@ -20,7 +20,7 @@ const HomeLayouts = () => {
             </header>
 
             <main className='my-12 w-11/12 mx-auto text-center grid grid-cols-12 gap-10'>
-                <aside className="left_nav col-span-3">
+                <aside className="left_nav col-span-3 sticky top-0 h-fit">
                     <LeftAside></LeftAside>
                 </aside>
 
@@ -28,7 +28,7 @@ const HomeLayouts = () => {
                     <Outlet></Outlet>
                 </aside>
 
-                <aside className="right_nav col-span-3 ">
+                <aside className="right_nav col-span-3 sticky top-0 h-fit ">
                     <RightAside></RightAside>
                 </aside>
             </main>
