@@ -1,12 +1,14 @@
 import React, { useContext, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../../provider/AuthProvider';
 
 const Register = () => {
-    const { createUser, setUser } = useContext(AuthContext)
-    
-    const [nameError,setNameError]=useState("")
-    
+    const { createUser, setUser, updateUser } = useContext(AuthContext)
+
+    const [nameError, setNameError] = useState("")
+
+    const navigate = useNavigate();
+
 
     const handleRegister = (e) => {
         e.preventDefault();
@@ -27,16 +29,24 @@ const Register = () => {
 
 
         createUser(email, password)
-            .then((userCredential) =>{
+            .then((userCredential) => {
                 const user = userCredential.user;
-                setUser(user)
-                // console.log(user);
+                updateUser({ displayName: name, photoURL: photo })
+                    .then(() => {
+                        setUser({ ...user, displayName: name, photoURL: photo });
+                        navigate("/")
+                    }).catch((error) =>
+                    {
+                        console.log(error);
+                        setUser(user);
+                    }                     
+                    )
             })
             .catch((error) => {
                 const errorMessage = error.messaage;
                 alert(errorMessage)
-        })
-        
+            })
+
     }
     return (
         <div className='flex justify-center min-h-screen items-center'>
@@ -49,18 +59,18 @@ const Register = () => {
                         <input name='name' type="text" className="input" placeholder="Name" required />
                         {/* name error text */}
                         {nameError && <h1 className='text-red-500'>{nameError}</h1>}
-                        
+
                         {/* Phote URL */}
                         <label className="label">Photo URL</label>
-                        <input name='photo'  type="text" className="input" placeholder="Photo URL"  required/>
+                        <input name='photo' type="text" className="input" placeholder="Photo URL" required />
 
                         {/* email */}
                         <label className="label">Email</label>
-                        <input name='email' type="email" className="input" placeholder="Email"  required/>
+                        <input name='email' type="email" className="input" placeholder="Email" required />
 
                         {/* password */}
                         <label className="label">Password</label>
-                        <input name='password' type="password" className="input" placeholder="Password"  required/>
+                        <input name='password' type="password" className="input" placeholder="Password" required />
 
                         <button type='submit' className="btn btn-neutral mt-4">Register</button>
                         <p className='text-center pt-4'>Already have an account? <Link to="/auth/login" className='text-secondary'>Login</Link></p>

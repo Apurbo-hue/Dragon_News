@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react';
 import app from './../Firebase/firebase.config'
 import { SiAkasaair } from 'react-icons/si';
@@ -28,6 +28,11 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth,email,password)
     }
 
+    // update user
+    const updateUser = (updatedData) => {
+        return updateProfile(auth.currentUser,updatedData)
+    }
+
 
     // signout function
     const logOut = () => {
@@ -47,7 +52,7 @@ const AuthProvider = ({ children }) => {
     
 
     const authData = {
-        user, setUser,createUser,logOut,signInUser,loading,setLoading
+        user, setUser,createUser,logOut,signInUser,loading,setLoading,updateUser
     }
 
     return <AuthContext value={authData}>
