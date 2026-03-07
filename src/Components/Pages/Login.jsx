@@ -19,7 +19,7 @@ const Login = () => {
         signInUser(email, password)
         .then((userCredential) => {
             const user = userCredential.user;
-            console.log(user);
+            // console.log(user);
             navigate(`${location.state?location.state:"/"}`)
         })
             .catch((error) => {

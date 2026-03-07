@@ -13,7 +13,7 @@ const HomeLayouts = () => {
         <div>
             <header className='my-8'>
                 <Header></Header>
-                {import.meta.env.VITE.VITE_name}
+               
                 <section className='w-11/12 mx-auto py-3'>
                     <LatestNews></LatestNews>
                 </section>
