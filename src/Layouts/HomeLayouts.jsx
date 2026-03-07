@@ -22,17 +22,17 @@ const HomeLayouts = () => {
                 </nav>
             </header>
 
-            <main className='my-12 w-11/12 mx-auto text-center grid grid-cols-12 gap-10'>
-                <aside className="left_nav col-span-3 sticky top-0 h-fit">
+            <main className='my-12 w-11/12 mx-auto text-center grid grid-cols-1 sm:grid-cols-12 gap-10'>
+                <aside className="left_nav sm:col-span-3 sm:sticky top-0 h-fit">
                     <LeftAside></LeftAside>
                 </aside>
 
-                <aside className="main col-span-6">
+                <aside className="main sm:col-span-6">
                     {state == "loading"?<Loading></Loading>:  <Outlet></Outlet>}
                   
                 </aside>
 
-                <aside className="right_nav col-span-3 sticky top-0 h-fit ">
+                <aside className="right_nav sm:col-span-3 sm:sticky top-0 h-fit ">
                     <RightAside></RightAside>
                 </aside>
             </main>

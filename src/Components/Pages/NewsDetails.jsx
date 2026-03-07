@@ -27,15 +27,15 @@ const NewsDetails = () => {
                 <Header></Header>
             </header>
 
-            <main className='w-11/12 mx-auto grid grid-cols-12 gap-8'>
-                <section className='col-span-9 *:py-4'>
+            <main className='w-11/12 mx-auto grid sm:grid-cols-12 gap-8'>
+                <section className='sm:col-span-9 *:py-4'>
                     <h1 className='font-bold'>News Details</h1>
                     <img className='w-full min-h-87.5 object-cover ' src={news.image_url} alt="" />
                     <h1 className='font-semibold text-2xl'>{news.title}</h1>
                     <h2>{news.details}</h2>
                     <Link to={`/categories/${news.category_id}`} className='btn btn-secondary'><IoMdArrowRoundBack /> Return to category</Link>
                 </section>
-                <aside className='col-span-3'>
+                <aside className='sm:col-span-3'>
                     <RightAside></RightAside>
                 </aside>
             </main>
