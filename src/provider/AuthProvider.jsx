@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWith
 import React, { createContext, useEffect, useState } from 'react';
 import app from './../Firebase/firebase.config'
 import { SiAkasaair } from 'react-icons/si';
+import PrivateRoute from './PrivateRoute';
 const auth = getAuth(app);
 
 
@@ -10,16 +11,20 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
 
     const [user, setUser] = useState(null)
+    const [loading,setLoading]=useState(true)
 
-    console.log(user)
+
+    // console.log(user)
 
     //  create user function
-    const createUser = (email,password) => {
+    const createUser = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth,email,password)
     }
 
     // sign in function
     const signInUser = (email, password) => {
+        setLoading(true)
         return signInWithEmailAndPassword(auth,email,password)
     }
 
@@ -32,7 +37,8 @@ const AuthProvider = ({ children }) => {
     //  current user function
     useEffect(() => {
        const unsubscribe =  onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser)
+           setUser(currentUser)
+           setLoading(false)
         });
         return () => {
             unsubscribe();
@@ -41,11 +47,13 @@ const AuthProvider = ({ children }) => {
     
 
     const authData = {
-        user, setUser,createUser,logOut,signInUser
+        user, setUser,createUser,logOut,signInUser,loading,setLoading
     }
 
     return <AuthContext value={authData}>
-        {children}
+
+             {children}
+   
     </AuthContext>;
 };
 
